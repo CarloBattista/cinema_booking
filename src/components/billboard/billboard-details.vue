@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="content-logo w-full max-w-[200px]">
-                    <img src="https://image.tmdb.org/t/p/original/vJ8klKeBNrUkgUq6mnsWHOakgCk.png" alt="Content logo">
+                    <img src="https://image.tmdb.org/t/p/original/vJ8klKeBNrUkgUq6mnsWHOakgCk.png" alt="Content logo" loading="lazy">
                 </div>
                 <div class="metadata w-full mt-4 flex gap-1.5 items-center md:justify-start justify-center">
                     <div class="content-provider relative h-6 aspect-square rounded-full overflow-hidden bg-white">

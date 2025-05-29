@@ -5,9 +5,11 @@
             <!-- <div class="relative w-full h-full ml-7 flex gap-4 items-center"></div> -->
         </div>
         <div class="h-full flex items-center justify-end">
-            <div class="relative h-8 aspect-square bg-black rounded-full overflow-hidden cursor-pointer">
-                <img src="/_resources/user.webp" alt="" draggable="false" class="w-full h-full object-cover">
-            </div>
+            <RouterLink to="/account">
+                <div class="relative h-8 aspect-square bg-black rounded-full overflow-hidden cursor-pointer">
+                    <img src="/_resources/user.webp" alt="" draggable="false" class="w-full h-full object-cover">
+                </div>
+            </RouterLink>
         </div>
     </div>
 </template>

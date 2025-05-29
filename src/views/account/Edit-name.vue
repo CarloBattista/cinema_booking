@@ -1,6 +1,11 @@
 <template>
     <navbar />
     <div class="w-full h-screen">
+        <div class="absolute z-10 top-0 left-0 w-full h-[70vh]">
+            <img src="/_resources/images/background-utility.jpg" alt="image background" class="w-full h-full object-cover">
+            <div class="vignette radial absolute top-0 left-0 w-full h-full"></div>
+            <div class="vignette linear absolute top-0 left-0 w-full h-full"></div>
+        </div>
         <div class="relative z-20 max-w-[650px] h-full mx-auto px-6 flex flex-col gap-6 justify-center">
             <div class="w-full flex flex-col gap-1.5 items-center text-center">
                 <h2 class="text-white sm:text-2xl text-base font-semibold">Change Your Name</h2>
@@ -9,7 +14,7 @@
             <div class="bg-fields w-full p-12 rounded-2xl">
                 <div class="w-full mb-6 flex flex-col gap-1">
                     <p class="text-white text-base font-normal">Current Name:</p>
-                    <h3 class="text-white text-xs font-semibold">Carlo Battista</h3>
+                    <h3 class="text-white text-xs font-semibold">{{ auth.profile?.first_name }} {{ auth.profile?.last_name }}</h3>
                 </div>
                 <form class="w-full flex flex-col" @submit.prevent>
                     <div class="w-full flex flex-col gap-4">
@@ -17,7 +22,7 @@
                         <InputLg v-model="fields.profile.lastName" type="text" forInput="lastName" label="Last Name" :required="true" />
                     </div>
                     <div class="w-full flex gap-4 mt-6">
-                        <ButtonPr class="w-full" type="primary" :hasIcon="false" label="Save" :loading="false" :disabled="false" />
+                        <ButtonPr @click="actionEditName" class="w-full" type="primary" :hasIcon="false" label="Save" :loading="fields.loading" :disabled="false" />
                         <RouterLink to="/account" class="w-full">
                             <ButtonPr class="w-full" type="secondary" :hasIcon="false" label="Cancel" :loading="false" :disabled="false" />
                         </RouterLink>
@@ -29,6 +34,7 @@
 </template>
 
 <script>
+import { supabase } from "../../lib/supabase";
 import { auth } from "../../data/auth";
 
 import navbar from "../../components/nav/navbar.vue";
@@ -62,6 +68,30 @@ export default {
                     lastName: null
                 },
                 loading: false,
+            }
+        }
+    },
+    methods: {
+        async actionEditName() {
+            this.fields.loading = true;
+
+            try {
+                const { data, error } = await supabase
+                    .from('profiles')
+                    .update({
+                        first_name: this.fields.profile.firstName,
+                        last_name: this.fields.profile.lastName
+                    })
+                    .eq('user_id', this.auth.user.id);
+
+                    if (!error) {
+                        this.$emit('profile-updated');
+                        this.$router.push({ name: 'account' });
+                    }
+            } catch (e) {
+                console.error(e);
+            } finally {
+                this.fields.loading = false;
             }
         }
     }

@@ -1,6 +1,11 @@
 <template>
     <navbar />
     <div class="w-full h-screen">
+        <div class="absolute z-10 top-0 left-0 w-full h-[70vh]">
+            <img src="/_resources/images/background-utility.jpg" alt="image background" class="w-full h-full object-cover">
+            <div class="vignette radial absolute top-0 left-0 w-full h-full"></div>
+            <div class="vignette linear absolute top-0 left-0 w-full h-full"></div>
+        </div>
         <div class="relative z-20 max-w-[650px] h-full mx-auto px-6 flex flex-col gap-6 justify-center">
             <div class="w-full flex flex-col gap-1.5 items-center text-center">
                 <h2 class="text-white sm:text-2xl text-base font-semibold">Account</h2>
@@ -38,7 +43,7 @@
                                     <Pencil size="20" />
                                 </div>
                             </div>
-                            <p class="text-white text-xs font-normal">Carlo Battista</p>
+                            <p class="text-white text-xs font-normal">{{ auth.profile?.first_name }} {{ auth.profile?.last_name }}</p>
                         </div>
                     </RouterLink>
                 </div>

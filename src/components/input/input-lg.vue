@@ -1,6 +1,6 @@
 <template>
     <div class="relative w-full">
-        <input @focusin="focusIn" @focusout="focusOut" @input="updateValue" :type="inputType" :id="forInput" :value="modelValue" class="w-full h-14 max-h-14 px-6 pt-3 bg-[#14181B] rounded-3xl outline-0">
+        <input @focusin="focusIn" @focusout="focusOut" @input="updateValue" :type="inputType" :id="forInput" :value="modelValue" class="w-full h-14 max-h-14 px-6 pt-3 border border-solid border-white/50 bg-black/20 focus:border-white/80 focus:bg-black/80 rounded-3xl outline-0">
         <label :for="forInput" class="absolute left-6 font-normal pointer-events-none transition-all duration-300" :class="{ 'text-[#9FA3A6] text-xs top-[15%] translate-y-[0%]': isFocused, 'text-white text-base top-1/2 translate-y-[-50%]': !isFocused }">
             {{ label }}
             <span v-if="required">*</span>

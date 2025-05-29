@@ -73,6 +73,8 @@ export default {
                     this.auth.session = data.session;
                     this.auth.isAuthenticated = true;
 
+                    this.auth.USER_AUTH_ID = data.user.id;
+
                     localStorage.setItem('crps_auth', JSON.stringify({
                         user: this.auth.user,
                         session: this.auth.session,

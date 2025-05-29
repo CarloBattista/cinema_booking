@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RouterView />
+    <RouterView @user-updated="getUser" @profile-updated="getProfile" />
   </div>
 </template>
 
@@ -53,6 +53,23 @@ export default {
         console.error(e);
       }
     },
+    async getProfile() {
+      const AUTH_USER_ID = this.auth.user.id;
+
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('user_id', AUTH_USER_ID)
+
+        if (!error) {
+          // console.log(data);
+          this.auth.profile = data[0];
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
   mounted() {
     this.getUser();
@@ -62,6 +79,7 @@ export default {
       handler(value) {
         if (value) {
           this.getSession();
+          this.getProfile();
         }
       },
       deep: true
