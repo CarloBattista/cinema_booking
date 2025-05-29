@@ -89,6 +89,9 @@ export default {
                 this.fields.loading = false;
             }
         }
+    },
+    mounted() {
+        window.scrollTo(0, 0);
     }
 }
 </script>

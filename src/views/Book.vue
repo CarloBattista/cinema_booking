@@ -60,6 +60,9 @@ export default {
             immediate: true,
             deep: true
         },
+    },
+    mounted() {
+        window.scrollTo(0, 0);
     }
 }
 </script>

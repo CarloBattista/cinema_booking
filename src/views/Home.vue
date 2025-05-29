@@ -1,7 +1,7 @@
 <template>
     <navbar />
     <div class="relative z-10 w-full">
-        <CarouselBillboard v-if="!store.contents.loading" />
+        <CarouselBillboard />
         <CarouselRooms />
         <CarouselContent type="now-playing" />
         <CarouselContent type="upcoming" />
@@ -51,6 +51,8 @@ export default {
         }
     },
     mounted() {
+        window.scrollTo(0, 0);
+        
         this.getContents();
     }
 }
