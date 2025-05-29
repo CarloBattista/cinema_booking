@@ -20,7 +20,7 @@
                 </div>
                 <InputLg v-model="fields.user.email" type="email" forInput="email" label="Email" />
                 <InputLg v-model="fields.user.password" type="password" forInput="password" label="Password" />
-                <ButtonPr class="mt-11" type="primary" :hasIcon="false" label="Create account" :loading="fields.loading"
+                <ButtonPr @click="actionSignup" class="mt-11" type="primary" :hasIcon="false" label="Create account" :loading="fields.loading"
                     :disabled="fields.loading" />
             </form>
             <div class="w-full flex flex-col gap-2 items-center justify-center text-center">
@@ -33,6 +33,9 @@
 </template>
 
 <script>
+import { supabase } from "../../lib/supabase";
+import { auth } from "../../data/auth";
+
 import InputLg from "../../components/input/input-lg.vue";
 import ButtonPr from "../../components/button/button-pr.vue";
 
@@ -44,6 +47,8 @@ export default {
     },
     data() {
         return {
+            auth,
+            
             fields: {
                 user: {
                     firstName: "",
@@ -58,6 +63,31 @@ export default {
                     password: null
                 },
                 loading: false,
+            }
+        }
+    },
+    methods: {
+        async actionSignup() {
+            this.fields.loading = true;
+
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: this.fields.user.email,
+                    password: this.fields.user.password
+                });
+
+                if (!error) {
+                    // console.log(data);
+
+                    this.auth.user = data.user;
+                    this.auth.session = data.session;
+
+                    this.$router.push({ name: 'signin' });
+                }
+            } catch (e) {
+                console.error(e);
+            } finally {
+                this.fields.loading = false;
             }
         }
     }

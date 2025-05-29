@@ -17,7 +17,7 @@
                 <InputLg v-model="fields.user.email" type="email" forInput="email" label="Email" />
                 <InputLg v-model="fields.user.password" type="password" forInput="password" label="Password" />
                 <RouterLink to="/identity/forgot-password" class="w-full text-end text-white text-sm font-medium">Forgot Password?</RouterLink>
-                <ButtonPr class="mt-11" type="primary" :hasIcon="false" label="Sign in" :loading="fields.loading" :disabled="fields.loading" />
+                <ButtonPr @click="actionSignin" class="mt-11" type="primary" :hasIcon="false" label="Sign in" :loading="fields.loading" :disabled="fields.loading" />
             </form>
             <div class="w-full flex flex-col gap-2 items-center justify-center text-center">
                 <p class="text-white sm:text-base text-sm font-normal">Don't have an account? <strong><RouterLink to="/identity/signup">Create one</RouterLink></strong></p>
@@ -27,6 +27,9 @@
 </template>
 
 <script>
+import { supabase } from "../../lib/supabase";
+import { auth } from "../../data/auth";
+
 import InputLg from "../../components/input/input-lg.vue";
 import ButtonPr from "../../components/button/button-pr.vue";
 
@@ -38,16 +41,50 @@ export default {
     },
     data() {
         return {
+            auth,
+
             fields: {
                 user: {
-                    email: "",
-                    password: ""
+                    email: "carlitobatti@gmail.com",
+                    password: "carlo1234"
                 },
                 errors: {
                     email: null,
                     password: null
                 },
                 loading: false,
+            }
+        }
+    },
+    methods: {
+        async actionSignin() {
+            this.fields.loading = true;
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: this.fields.user.email,
+                    password: this.fields.user.password
+                });
+
+                if (!error) {
+                    // console.log(data);
+
+                    this.auth.user = data.user;
+                    this.auth.session = data.session;
+                    this.auth.isAuthenticated = true;
+
+                    localStorage.setItem('crps_auth', JSON.stringify({
+                        user: this.auth.user,
+                        session: this.auth.session,
+                        isAuthenticated: this.auth.isAuthenticated
+                    }));
+
+                    this.$router.push({ name: 'home' });
+                }
+            } catch (e) {
+                console.error(e);
+            } finally {
+                this.fields.loading = false;
             }
         }
     }
