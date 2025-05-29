@@ -80,12 +80,12 @@ export default {
 
 /* Secondary */
 .btn-pr.color-secondary {
-    background-color: black;
+    background-color: rgba(62, 62, 62, .75);
     color: white;
 }
 
 .btn-pr.color-secondary:hover {
-    background-color: #14181B;
+    background-color: rgba(74, 74, 74, .75);
 }
 
 /* Loader */

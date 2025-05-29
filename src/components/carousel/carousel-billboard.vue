@@ -1,7 +1,7 @@
 <template>
     <div class="carousel-billboard relative w-full h-[90vh]">
         <Splide :options="options" aria-label="Hero billboard carousel">
-            <SplideSlide v-for="(billboard, billboardIndex) in 6" :key="billboardIndex">
+            <SplideSlide v-for="(billboard, billboardIndex) in 4" :key="billboardIndex">
                 <billboard :data="billboard" />
             </SplideSlide>
         </Splide>

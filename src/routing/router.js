@@ -4,6 +4,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Signin from '../views/onBoard/Signin.vue';
 import Signup from '../views/onBoard/Signup.vue';
 
+// Account
+import Account from '../views/account/Account.vue';
+import EditEmail from '../views/account/Edit-email.vue';
+import EditPassword from '../views/account/Edit-password.vue';
+import EditName from '../views/account/Edit-name.vue';
+
 // General
 import Home from '../views/Home.vue';
 
@@ -23,7 +29,37 @@ const routes = [
         props: true,
         meta: { title: "CornPass" }
     },
-    
+
+    // Account
+    {
+        path: '/account',
+        name: 'account',
+        component: Account,
+        props: true,
+        meta: { title: "CornPass" }
+    },
+    {
+        path: '/account/edit/email',
+        name: 'account-edit-email',
+        component: EditEmail,
+        props: true,
+        meta: { title: "CornPass" }
+    },
+    {
+        path: '/account/edit/password',
+        name: 'account-edit-password',
+        component: EditPassword,
+        props: true,
+        meta: { title: "CornPass" }
+    },
+    {
+        path: '/account/edit/name',
+        name: 'account-edit-name',
+        component: EditName,
+        props: true,
+        meta: { title: "CornPass" }
+    },
+        
     // General
     {
         path: '/',
