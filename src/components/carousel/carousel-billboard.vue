@@ -1,7 +1,7 @@
 <template>
     <div class="carousel-billboard relative w-full h-[90vh]">
         <Splide :options="options" aria-label="Hero billboard carousel">
-            <SplideSlide v-for="(billboard, billboardIndex) in 4" :key="billboardIndex">
+            <SplideSlide v-for="(billboard, billboardIndex) in store.contents.data" :key="billboardIndex">
                 <billboard :data="billboard" />
             </SplideSlide>
         </Splide>
@@ -10,6 +10,7 @@
 
 <script>
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import { store } from "../../data/store";
 
 import billboard from '../billboard/billboard.vue';
 
@@ -23,15 +24,21 @@ export default {
 
         billboard
     },
+    data() {
+        return {
+            store
+        }
+    },
     setup() {
         const options = {
-            rewind: true,
             arrows: false,
+            drag: false,
+            rewind: true,
             pagination: true,
+            autoplay: true,
             perPage: 1,
             perMove: 1,
             type: 'loop',
-            autoplay: true,
             interval: 10000, // 10 seconds
         };
 

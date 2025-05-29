@@ -2,14 +2,13 @@
     <div class="billboard-details absolute z-20 bottom-0 left-0 w-full h-full px-[5%] py-[80px]">
         <div class="w-full h-full flex flex-col justify-end">
             <div class="min-w-[20%] md:max-w-[35%] max-w-full flex flex-col md:items-start items-center">
-                <div class="badge-container w-full mb-3.5 flex md:justify-start justify-center">
-                    <div
-                        class="badge relative h-[26px] max-h-[26px] rounded-[11px] px-2 flex items-center justify-center">
-                        <span class="relative z-[3] text-white text-xs font-medium whitespace-nowrap">In arrivo nelle sale il 12 giugno 2025</span>
+                <div v-if="data?.supplemental_message" class="badge-container w-full mb-3.5 flex md:justify-start justify-center">
+                    <div class="badge relative h-[26px] max-h-[26px] rounded-[11px] px-2 flex items-center justify-center">
+                        <span class="relative z-[3] text-white text-xs font-medium whitespace-nowrap">{{ data?.supplemental_message }}</span>
                     </div>
                 </div>
                 <div class="content-logo w-full max-w-[200px]">
-                    <img src="https://image.tmdb.org/t/p/original/vJ8klKeBNrUkgUq6mnsWHOakgCk.png" alt="Content logo" loading="lazy">
+                    <img :src="data?.title_treatment" :alt="data?.title" loading="lazy">
                 </div>
                 <div class="metadata w-full mt-4 flex gap-1.5 items-center md:justify-start justify-center">
                     <div class="content-provider relative h-6 aspect-square rounded-full overflow-hidden bg-white">
@@ -20,7 +19,7 @@
                     </div>
                 </div>
                 <div class="description w-full max-w-[300px] mt-4 md:block hidden">
-                    <p class="text-white text-sm font-medium opacity-65">La giovanissima ballerina Rooney diventa una killer in seguito all'uccisione di tutta la sua famiglia. Una volta cresciuta e addestrata, la donna è assetata di vendetta ed è alla ricerca degli assassini dei suoi cari.</p>
+                    <p class="text-white text-sm font-medium opacity-65">{{ data?.synopsis }}</p>
                 </div>
                 <div class="buttons w-full mt-4 flex gap-3 items-center md:justify-start justify-center">
                     <ButtonPr style="height: 48px;" type="primary" :hasIcon="true" label="Prenota" :loading="false"
@@ -29,7 +28,7 @@
                             <Ticket size="20" />
                         </template>
                     </ButtonPr>
-                    <ButtonDot style="height: 48px;" type="primary" :loading="false" :disabled="false">
+                    <ButtonDot @click="watchTrailer" style="height: 48px;" type="primary" :loading="false" :disabled="false">
                         <template #icon>
                             <Clapperboard size="20" />
                         </template>
@@ -56,7 +55,27 @@ export default {
         // ICONS
         Clapperboard,
         Ticket
-    }
+    },
+    props: {
+        data: Object
+    },
+    computed: {
+        isReleased() {
+            if (!this.data?.launch_date) return false;
+            const launchDate = new Date(this.data.launch_date);
+            const now = new Date();
+            return launchDate <= now;
+        },
+        formattedDate() {
+            if (!this.data?.launch_date) return '';
+            const date = new Date(this.data.launch_date);
+            return date.toLocaleDateString('it-IT', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+    },
 }
 </script>
 
