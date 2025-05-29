@@ -2,6 +2,7 @@
     <navbar />
     <div class="relative z-10 w-full">
         <CarouselBillboard v-if="!store.contents.loading" />
+        <CarouselRooms />
     </div>
 </template>
 
@@ -11,12 +12,14 @@ import { store } from "../data/store";
 
 import navbar from "../components/nav/navbar.vue";
 import CarouselBillboard from "../components/carousel/carousel-billboard.vue";
+import CarouselRooms from "../components/carousel/carousel-rooms.vue";
 
 export default {
     name: "Home",
     components: {
         navbar,
-        CarouselBillboard
+        CarouselBillboard,
+        CarouselRooms
     },
     data() {
         return {

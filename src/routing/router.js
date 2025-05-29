@@ -12,6 +12,7 @@ import EditName from '../views/account/Edit-name.vue';
 
 // General
 import Home from '../views/Home.vue';
+import Book from '../views/Book.vue';
 
 const routes = [
     // OnBoard
@@ -68,6 +69,13 @@ const routes = [
         props: true,
         meta: { title: "CornPass" }
     },
+    {
+        path: '/book/:id',
+        name: 'book',
+        component: Book,
+        props: true,
+        meta: { title: "CornPass" }
+    },    
 ];
 
 const router = createRouter({

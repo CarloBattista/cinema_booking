@@ -5,5 +5,10 @@ export const store = reactive({
         data: [],
         loading: false,
         error: null
+    },
+    rooms: {
+        data: [],
+        loading: false,
+        error: null
     }
 });

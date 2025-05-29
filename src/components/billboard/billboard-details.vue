@@ -11,24 +11,28 @@
                     <img :src="data?.title_treatment" :alt="data?.title" loading="lazy">
                 </div>
                 <div class="metadata w-full mt-4 flex gap-1.5 items-center md:justify-start justify-center">
-                    <div class="content-provider relative h-6 aspect-square rounded-full overflow-hidden bg-white">
-                    </div>
+                    <div v-if="false" class="content-provider relative h-6 aspect-square rounded-full overflow-hidden bg-white"></div>
                     <div class="metadata-list">
-                        <span v-for="(genre, genreIndex) in 2" :key="genreIndex"
-                            class="metadata-list-item text-white text-sm font-medium">Azione</span>
+                        <span v-for="(genre, genreIndex) in 2" :key="genreIndex" class="metadata-list-item text-white text-sm font-medium">Genre {{ genreIndex+1 }}</span>
                     </div>
                 </div>
                 <div class="description w-full max-w-[300px] mt-4 md:block hidden">
                     <p class="text-white text-sm font-medium opacity-65">{{ data?.synopsis }}</p>
                 </div>
                 <div class="buttons w-full mt-4 flex gap-3 items-center md:justify-start justify-center">
-                    <ButtonPr style="height: 48px;" type="primary" :hasIcon="true" label="Prenota" :loading="false"
+                    <ButtonPr v-if="!isBook" @click="handleBooking(data)" style="height: 48px;" type="primary" :hasIcon="true" label="Prenota" :loading="false"
                         :disabled="false">
                         <template #icon>
                             <Ticket size="20" />
                         </template>
                     </ButtonPr>
-                    <ButtonDot @click="watchTrailer" style="height: 48px;" type="primary" :loading="false" :disabled="false">
+                    <ButtonPr v-if="isBook" style="height: 48px;" type="primary" :hasIcon="true" label="Guarda il Trailer" :loading="false"
+                        :disabled="false">
+                        <template #icon>
+                            <Ticket size="20" />
+                        </template>
+                    </ButtonPr>
+                    <ButtonDot v-if="!isBook" @click="watchTrailer" style="height: 48px;" type="primary" :loading="false" :disabled="false">
                         <template #icon>
                             <Clapperboard size="20" />
                         </template>
@@ -57,7 +61,8 @@ export default {
         Ticket
     },
     props: {
-        data: Object
+        data: Object,
+        isBook: Boolean
     },
     computed: {
         isReleased() {
@@ -76,6 +81,15 @@ export default {
             });
         }
     },
+    methods: {
+        handleBooking(data) {
+            const CONTENT_ID = data?.id;
+
+            if (data && CONTENT_ID) {
+                this.$router.push({ name: 'book', params: { id: CONTENT_ID } });
+            }
+        }
+    }
 }
 </script>
 

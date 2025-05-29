@@ -1,5 +1,5 @@
 <template>
-    <div class="billboard w-full h-full">
+    <div class="billboard w-full h-[90vh]">
         <div class="relative z-10 w-full h-full">
             <picture class="w-full h-full object-cover">
                 <source media="(max-width: 768px)" :srcset="data?.image_mob" loading="lazy">
@@ -8,7 +8,7 @@
             <div class="vignette left absolute z-20 top-0 left-0 w-1/2 h-full md:block hidden"></div>
             <div class="vignette bottom absolute z-20 bottom-0 left-0 w-full h-1/2"></div>
         </div>
-        <billboard-details :data="data" />
+        <billboard-details :data="data" :isBook="isBook" />
     </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
         billboardDetails
     },
     props: {
-        data: Object
+        data: Object,
+        isBook: Boolean
     }
 }
 </script>

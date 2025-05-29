@@ -1,8 +1,8 @@
 <template>
-    <div class="carousel-billboard relative w-full h-[90vh]">
+    <div class="carousel-billboard relative w-full">
         <Splide :options="options" aria-label="Hero billboard carousel">
             <SplideSlide v-for="(billboard, billboardIndex) in store.contents.data" :key="billboardIndex">
-                <billboard :data="billboard" />
+                <billboard :data="billboard" :isBook="false" />
             </SplideSlide>
         </Splide>
     </div>
