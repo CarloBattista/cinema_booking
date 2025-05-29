@@ -1,12 +1,17 @@
 <template>
-    <div>
-
+    <div class="relative z-10 w-full">
+        <CarouselBillboard />
     </div>
 </template>
 
 <script>
+import CarouselBillboard from "../components/carousel/carousel-billboard.vue";
+
 export default {
-    name: "Home"
+    name: "Home",
+    components: {
+        CarouselBillboard
+    }
 }
 </script>
 

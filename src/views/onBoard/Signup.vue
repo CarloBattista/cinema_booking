@@ -20,7 +20,7 @@
                 </div>
                 <InputLg v-model="fields.user.email" type="email" forInput="email" label="Email" />
                 <InputLg v-model="fields.user.password" type="password" forInput="password" label="Password" />
-                <ButtonPr class="mt-11" type="primary" :hasIcon="true" label="Create account" :loading="fields.loading"
+                <ButtonPr class="mt-11" type="primary" :hasIcon="false" label="Create account" :loading="fields.loading"
                     :disabled="fields.loading" />
             </form>
             <div class="w-full flex flex-col gap-2 items-center justify-center text-center">

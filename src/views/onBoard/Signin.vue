@@ -17,7 +17,7 @@
                 <InputLg v-model="fields.user.email" type="email" forInput="email" label="Email" />
                 <InputLg v-model="fields.user.password" type="password" forInput="password" label="Password" />
                 <RouterLink to="/identity/forgot-password" class="w-full text-end text-white text-sm font-medium">Forgot Password?</RouterLink>
-                <ButtonPr class="mt-11" type="primary" :hasIcon="true" label="Sign in" :loading="fields.loading" :disabled="fields.loading" />
+                <ButtonPr class="mt-11" type="primary" :hasIcon="false" label="Sign in" :loading="fields.loading" :disabled="fields.loading" />
             </form>
             <div class="w-full flex flex-col gap-2 items-center justify-center text-center">
                 <p class="text-white sm:text-base text-sm font-normal">Don't have an account? <strong><RouterLink to="/identity/signup">Create one</RouterLink></strong></p>
