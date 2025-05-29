@@ -1,5 +1,5 @@
 <template>
-    <div class="carousel-rooms relative w-full">
+    <div class="carousel-rooms relative w-full mb-[3vw]">
         <div class="w-full px-[5%] mb-3 flex items-center">
             <h2 class="text-white text-xl font-semibold">Sale</h2>
         </div>

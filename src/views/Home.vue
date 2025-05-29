@@ -3,6 +3,8 @@
     <div class="relative z-10 w-full">
         <CarouselBillboard v-if="!store.contents.loading" />
         <CarouselRooms />
+        <CarouselContent type="now-playing" />
+        <CarouselContent type="upcoming" />
     </div>
 </template>
 
@@ -13,13 +15,15 @@ import { store } from "../data/store";
 import navbar from "../components/nav/navbar.vue";
 import CarouselBillboard from "../components/carousel/carousel-billboard.vue";
 import CarouselRooms from "../components/carousel/carousel-rooms.vue";
+import CarouselContent from "../components/carousel/carousel-content.vue";
 
 export default {
     name: "Home",
     components: {
         navbar,
         CarouselBillboard,
-        CarouselRooms
+        CarouselRooms,
+        CarouselContent
     },
     data() {
         return {
@@ -33,9 +37,10 @@ export default {
             try {
                 const { data, error } = await supabase
                     .from('contents')
-                    .select('*');
+                    .select('*,content_genres(genres(*))');
 
                 if (!error) {
+                    console.log(data);
                     this.store.contents.data = data;
                 }
             } catch (e) {

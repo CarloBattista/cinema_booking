@@ -13,7 +13,9 @@
                 <div class="metadata w-full mt-4 flex gap-1.5 items-center md:justify-start justify-center">
                     <div v-if="false" class="content-provider relative h-6 aspect-square rounded-full overflow-hidden bg-white"></div>
                     <div class="metadata-list">
-                        <span v-for="(genre, genreIndex) in 2" :key="genreIndex" class="metadata-list-item text-white text-sm font-medium">Genre {{ genreIndex+1 }}</span>
+                        <span v-for="(genre, genreIndex) in data.content_genres" :key="genreIndex" class="metadata-list-item text-white text-sm font-medium">
+                            {{ genre.genres?.name }}
+                        </span>
                     </div>
                 </div>
                 <div class="description w-full max-w-[300px] mt-4 md:block hidden">

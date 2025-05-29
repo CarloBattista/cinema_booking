@@ -35,7 +35,7 @@ export default {
             try {
                 const { data, error } = await supabase
                     .from('contents')
-                    .select('*')
+                    .select('*,content_genres(genres(*))')
                     .eq('id', this.contentId)
                     .single();
 
