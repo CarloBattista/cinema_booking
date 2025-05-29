@@ -14,13 +14,19 @@
                 <h2 class="text-white sm:text-2xl text-base font-semibold">Let's Get You a Snak 😋</h2>
             </div>
             <form @submit.prevent class="w-full flex flex-col gap-3.5">
+                <div class="w-full flex gap-3.5">
+                    <InputLg v-model="fields.user.firstName" type="text" forInput="firstName" label="First Name" />
+                    <InputLg v-model="fields.user.lastName" type="text" forInput="lastName" label="Last Name" />
+                </div>
                 <InputLg v-model="fields.user.email" type="email" forInput="email" label="Email" />
                 <InputLg v-model="fields.user.password" type="password" forInput="password" label="Password" />
-                <RouterLink to="/identity/forgot-password" class="w-full text-end text-white text-sm font-medium">Forgot Password?</RouterLink>
-                <ButtonPr class="mt-11" type="primary" :hasIcon="true" label="Sign in" :loading="fields.loading" :disabled="fields.loading" />
+                <ButtonPr class="mt-11" type="primary" :hasIcon="true" label="Create account" :loading="fields.loading"
+                    :disabled="fields.loading" />
             </form>
             <div class="w-full flex flex-col gap-2 items-center justify-center text-center">
-                <p class="text-white sm:text-base text-sm font-normal">Don't have an account? <strong><RouterLink to="/identity/signup">Create one</RouterLink></strong></p>
+                <p class="text-white sm:text-base text-sm font-normal">Already have an account? <strong>
+                        <RouterLink to="/identity/signin">Sign in</RouterLink>
+                    </strong></p>
             </div>
         </div>
     </div>
@@ -31,7 +37,7 @@ import InputLg from "../../components/input/input-lg.vue";
 import ButtonPr from "../../components/button/button-pr.vue";
 
 export default {
-    name: "Signin",
+    name: "Signup",
     components: {
         InputLg,
         ButtonPr
@@ -40,10 +46,14 @@ export default {
         return {
             fields: {
                 user: {
+                    firstName: "",
+                    lastName: "",
                     email: "",
                     password: ""
                 },
                 errors: {
+                    firstName: null,
+                    lastName: null,
                     email: null,
                     password: null
                 },

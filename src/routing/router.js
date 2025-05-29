@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 // OnBoard
 import Signin from '../views/onBoard/Signin.vue';
+import Signup from '../views/onBoard/Signup.vue';
 
 // General
 import Home from '../views/Home.vue';
@@ -15,7 +16,14 @@ const routes = [
         props: true,
         meta: { title: "CornPass" }
     },
-
+    {
+        path: '/identity/signup',
+        name: 'signup',
+        component: Signup,
+        props: true,
+        meta: { title: "CornPass" }
+    },
+    
     // General
     {
         path: '/',
